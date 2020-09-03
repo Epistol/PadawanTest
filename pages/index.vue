@@ -1,6 +1,12 @@
 <template>
   <div>
     <Sale v-for="sale in sales" :key="sale.id" :data="sale"></Sale>
+
+    <v-fab-transition>
+      <v-btn fab large dark bottom right class="v-btn--example">
+        <v-icon x-large dark>gavel</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </div>
 </template>
 
