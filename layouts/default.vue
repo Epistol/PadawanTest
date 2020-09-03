@@ -19,7 +19,7 @@
           </v-col>
           <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
             <nuxt-link :to="'/'">
-              <img data-src="/logo.svg" :alt="'Interenchères'" />
+              <b style="color: red">Interenchères</b>
             </nuxt-link>
           </v-col>
         </v-row>

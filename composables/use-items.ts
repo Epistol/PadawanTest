@@ -40,14 +40,17 @@ export default function useItems({ ctx }: Options) {
     return data
   }
 
-  // const fetchPrizes = async (subtype: string = 'posts') => {
-  //   apiState.fetching = true
+  const fetchItems = async (id: string) => {
+    apiState.fetching = true
 
-  //   const { data } = await axios.get(`localhost:8000/items`, {
-  //     params: {},
-  //   })
-  //   globalState.items = data
-  // }
+    const { data } = await axios.get(`http://localhost:8000/items`, {
+      params: {
+        sale_id: id,
+      },
+    })
+    globalState.items = data
+    return data
+  }
 
   return {
     // @ts-ignore
@@ -55,5 +58,6 @@ export default function useItems({ ctx }: Options) {
     // @ts-ignore
     ...toRefs(globalState),
     fetchSales,
+    fetchItems,
   }
 }
