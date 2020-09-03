@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt-ts",
-    "server": "json-server --watch db.json",
+    "server": "json-server --watch db.json --port 8000",
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
@@ -15,6 +15,7 @@
     "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/axios": "^5.12.0",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "@vue/composition-api": "^1.0.0-beta.11",
     "commitizen": "^4.2.1",
     "nuxt": "^2.14.0"
   },
