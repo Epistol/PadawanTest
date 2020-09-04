@@ -1,19 +1,15 @@
 <template>
-  <v-card class="mx-auto" max-width="344">
+  <v-card class="mx-auto mb-4" max-width="344">
     <nuxt-link :to="'/sales/' + propData.id">
-      <v-card-title>
-        {{ propData.title }}
-      </v-card-title>
+      <v-card-title>{{ propData.title }}</v-card-title>
     </nuxt-link>
-    <v-card-text>
-      {{ propData.description }}
-    </v-card-text>
+    <v-card-text>{{ propData.description }}</v-card-text>
     <v-divider></v-divider>
 
     <v-card-actions>
-      <nuxt-link :to="'/sales/' + propData.id"
-        ><v-btn text color="red">Voir les lots</v-btn></nuxt-link
-      >
+      <nuxt-link :to="'/sales/' + propData.id">
+        <v-btn text color="red">Voir les lots</v-btn>
+      </nuxt-link>
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>

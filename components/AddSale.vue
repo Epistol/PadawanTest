@@ -8,10 +8,11 @@
     <v-dialog max-width="500px" v-model="dialog">
       <v-card class="mx-auto">
         <v-form ref="form" v-model="valid" :lazy-validation="true" class="pa-4 pt-6">
-          <v-text-field filled label="Titre de la vente"></v-text-field>
+          <v-text-field filled label="Titre de la vente" v-model="sale.title"></v-text-field>
           <v-textarea
             auto-grow
             clearable
+            v-model="sale.description"
             rows="4"
             filled
             name="input-5-3"
@@ -26,8 +27,8 @@
                 <v-text-field
                   filled
                   label="Description du lot"
-                  v-model="item.value"
-                  :value="item.value"
+                  v-model="item.description"
+                  :value="item.description"
                 ></v-text-field>
               </v-list-item-content>
 
@@ -38,14 +39,14 @@
               </v-list-item-action>
             </v-list-item>
           </v-list>
-          <v-btn class="mx-2" fab dark small left bottom color="indigo" @click="addItem()">
+          <v-btn class="mx-2" fab dark small right bottom color="indigo" @click="addItem()">
             <v-icon dark>mdi-plus</v-icon>
           </v-btn>
         </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn text color="primary">Submit</v-btn>
+          <v-btn text color="primary" @click="sendForm()">Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -70,13 +71,14 @@ export default defineComponent({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     //@ts-ignore
-    const { fetchSales } = useItems({ ctx })
+    const { fetchSales, addSale } = useItems({ ctx })
     const dialog = ref(false)
     const valid = ref(true)
-    const items = reactive({ content: [{ value: '' }] })
+    const items = reactive({ content: [{ description: '' }] })
+    const sale = reactive({ title: '', description: '' })
 
     const addItem = () => {
-      items.content.push({ value: '' })
+      items.content.push({ description: '' })
     }
 
     const removeItem = (id: number) => {
@@ -88,7 +90,20 @@ export default defineComponent({
       dialog.value = value
     }
 
-    return { toggleDialog, dialog, valid, items, addItem, removeItem }
+    const sendForm = async () => {
+      const data = await addSale(sale, items)
+    }
+
+    return {
+      toggleDialog,
+      dialog,
+      valid,
+      items,
+      addItem,
+      removeItem,
+      sale,
+      sendForm,
+    }
   },
 })
 </script>
