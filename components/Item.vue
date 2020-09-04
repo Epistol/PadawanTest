@@ -1,8 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="344">
-    <v-card-text>
-      {{ propData.description }}
-    </v-card-text>
+    <v-card-text>{{ propData.description }}</v-card-text>
     <v-divider></v-divider>
 
     <v-card-actions>
@@ -14,7 +12,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
-import useItems from '~/composables/use-items'
 export default defineComponent({
   name: 'Item',
   components: {},

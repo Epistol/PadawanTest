@@ -18,7 +18,14 @@
             </nuxt-link>
           </v-col>
           <v-col :lg="3" :md="3" :sm="12" align="center" justify="center">
-            <v-text-field hide-details label="Recherche" single-line solo></v-text-field>
+            <v-text-field
+              hide-details
+              label="Recherche"
+              single-line
+              solo
+              v-model="searchValue"
+              @keydown.enter="redirectToSearchResults(searchValue)"
+            ></v-text-field>
           </v-col>
           <v-col :lg="3" :md="3" :sm="12" align="center" justify="center">
             <nuxt-link :to="'/'">
@@ -44,13 +51,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  watch,
-  computed,
-  onMounted,
-} from '@vue/composition-api'
+import { defineComponent, ref, computed, onMounted } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'DefaultLayout',
@@ -60,6 +61,13 @@ export default defineComponent({
   setup(props, ctx) {
     let url = ref('')
     let searchValue = ref('')
+
+    const redirectToSearchResults = (val: any) => {
+      ctx.root.$router.push({
+        path: '/search',
+        query: { query: searchValue.value },
+      })
+    }
 
     onMounted(async () => {
       if (typeof window !== 'undefined') {
@@ -71,6 +79,7 @@ export default defineComponent({
     return {
       url,
       searchValue,
+      redirectToSearchResults,
     }
   },
 })

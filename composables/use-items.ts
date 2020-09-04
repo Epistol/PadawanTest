@@ -24,11 +24,12 @@ export default function useItems({ ctx }: Options) {
     fetching: false,
   })
 
-  const globalState: globalState = reactive({
+  const initialState = {
     sales: {},
     items: {},
     item: [{}],
-  })
+  }
+  const globalState: globalState = reactive({ ...initialState })
 
   const fetchSales = async () => {
     apiState.fetching = true
@@ -103,6 +104,34 @@ export default function useItems({ ctx }: Options) {
     })
   }
 
+  const searchQueryAction = async (query: string) => {
+    await resetState().then((res) => {
+      searchQuery(query, 'sales')
+      searchQuery(query, 'items')
+    })
+  }
+
+  const resetState = async () => {
+    Object.assign(globalState, initialState)
+  }
+
+  const searchQuery = async (query: string, category: string) => {
+    apiState.fetching = true
+
+    const { data } = await axios.get(`http://localhost:8000/` + category, {
+      params: {
+        q: query,
+      },
+    })
+    if (category === 'sales') {
+      globalState.sales = data
+    }
+    if (category === 'items') {
+      globalState.items = data
+    }
+    return data
+  }
+
   return {
     // @ts-ignore
     ...toRefs(apiState),
@@ -112,5 +141,8 @@ export default function useItems({ ctx }: Options) {
     fetchItems,
     addSale,
     addItems,
+    searchQuery,
+    resetState,
+    searchQueryAction,
   }
 }
