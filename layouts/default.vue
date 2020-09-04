@@ -17,7 +17,10 @@
               </v-btn>
             </nuxt-link>
           </v-col>
-          <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
+          <v-col :lg="3" :md="3" :sm="12" align="center" justify="center">
+            <v-text-field hide-details label="Recherche" single-line solo></v-text-field>
+          </v-col>
+          <v-col :lg="3" :md="3" :sm="12" align="center" justify="center">
             <nuxt-link :to="'/'">
               <b style="color: red">Interenchères</b>
             </nuxt-link>
@@ -56,6 +59,7 @@ export default defineComponent({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     let url = ref('')
+    let searchValue = ref('')
 
     onMounted(async () => {
       if (typeof window !== 'undefined') {
@@ -66,6 +70,7 @@ export default defineComponent({
 
     return {
       url,
+      searchValue,
     }
   },
 })
