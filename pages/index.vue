@@ -1,23 +1,19 @@
 <template>
   <div>
     <Sale v-for="sale in sales" :key="sale.id" :data="sale"></Sale>
-
-    <v-fab-transition>
-      <v-btn fab large dark bottom right class="v-btn--example">
-        <v-icon x-large dark>gavel</v-icon>
-      </v-btn>
-    </v-fab-transition>
+    <AddSale></AddSale>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, onMounted } from '@vue/composition-api'
 import useItems from '~/composables/use-items'
 import Sale from '~/components/Sale.vue'
+import AddSale from '~/components/AddSale.vue'
 
 export default defineComponent({
   name: 'Index',
-  components: { Sale },
+  components: { Sale, AddSale },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     //@ts-ignore
